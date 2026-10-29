@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/URV-teacher/computers-delivery-schema/master/computers-urv-delivery-schema-1.0.json",
+  "title": "Computers Practical Exercise Delivery Information",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "URL of the schema of this JSON, so that the editors that support it (e.g. VS Code) show its errors while filling it in. Leave it as is.",
+      "placeholder": "https://raw.githubusercontent.com/URV-teacher/computers-delivery-schema/master/computers-urv-delivery-schema-1.0.json"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name + surname of the student doing this delivery or only first name is a surname field is included too.",
+      "placeholder": "NOM I COGNOMS"
+    },
+    "surname": {
+      "type": "string",
+      "description": "Surname or surnames of the student doing this delivery."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "pattern": "@estudiants.urv.cat$",
+      "description": "Institutional URV email of the student doing this delivery. e.g. fulano.detal@estudiants.urv.cat",
+      "placeholder": "NOM.COGNOM@estudiants.urv.cat"
+    },
+    "repo": {
+      "type": "string",
+      "pattern": "^comp_[0-9]{1,2}$",
+      "description": "Name of the git repository of the delivery, previously assigned to the delivering student, in the DEIM git servers. e.g. comp_34, comp_20...",
+      "placeholder": "comp_XX"
+    },
+    "role": {
+      "type": "string",
+      "pattern": "^prog[1-4]$",
+      "description": "Role of the student in the delivery, as specified in the guides. Possible values: prog1, prog2, prog3 or prog4.",
+      "placeholder": "progY"
+    },
+    "course": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{4}$",
+      "description": "Academic course of the delivery, as its two years. e.g. 2025-2026 for the course that starts in September 2025.",
+      "placeholder": "AAAA-AAAA"
+    },
+    "phase": {
+      "type": "integer",
+      "enum": [
+        1,
+        2
+      ],
+      "description": "Phase that is being delivered. Possible values: 1 or 2.",
+      "placeholder": "Z"
+    },
+    "call": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Call of delivery. 1 for first call, 2 for second, 3 for additional and 4 for exceptional.",
+      "placeholder": "T"
+    },
+    "test": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{4,40}$",
+      "description": "Git commit SHA identifier of the delivered test commit in the previously specified repo in the repo property.",
+      "placeholder": "abc1234"
+    },
+    "fusion": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{4,40}$",
+      "description": "Git commit SHA identifier of the delivered fusion commit in the previously specified repo in the repo property.",
+      "placeholder": "123abcd"
+    },
+    "lab": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9,
+      "description": "Number of the laboratory assigned to student, for example 1 for laboratory L1, 2 for laboratory L2... Minimum is 1 and maximum depends on the number of laboratories implemented in the course.",
+      "placeholder": "M"
+    },
+    "blocks": {
+      "type": "array",
+      "description": "Blocks implemented by the student in this delivery, as specified in this guides.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "1A",
+          "1B",
+          "1C",
+          "1D",
+          "1E",
+          "1F",
+          "1G",
+          "1H",
+          "2A",
+          "2B",
+          "2C",
+          "2D",
+          "2E",
+          "2F",
+          "2G",
+          "2H",
+          "2Ia",
+          "2Ib",
+          "2Ic",
+          "2Id",
+          "2Ja",
+          "2Jb",
+          "2Jc",
+          "2Jd"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "repo",
+    "role",
+    "course",
+    "phase",
+    "call",
+    "test",
+    "fusion",
+    "blocks"
+  ],
+  "$comment": "The delivery JSON of a student. The properties with a placeholder are the template the students fill in (see tot.core.delivery_schema): the placeholder of a string is written as a string, and any other is written bare (e.g. \"call\": T), since no value of its type could stand for every one. The phase and the blocks of a template are those of the phase it's of."
+}
